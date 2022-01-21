@@ -4,7 +4,7 @@ commands:
   print_pipeline_id:
     description: "prints the pipeline id"
     steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo ${CIRCLE_WORKFLOW_ID}
 
 jobs:
 
@@ -68,6 +68,17 @@ jobs:
     steps:
       - print_pipeline_id
 
+  check_fail_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      
+      - run: return 1
+
+      - run: 
+          command: echo "we failed!"
+          when: on_fail
+
 workflows:
   version: 2
   build:
@@ -82,5 +93,7 @@ workflows:
   print_pipeline_id_flow:
     jobs:
       - print_pipeline_id_job
-
+  check_fail_flow:
+    jobs:
+      - check_fail_job
 
