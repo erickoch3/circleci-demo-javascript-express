@@ -1,5 +1,10 @@
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
 jobs:
 
   build:
@@ -55,6 +60,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+
+  print_pipeline_id_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: print_pipeline_id
 
 workflows:
   version: 2
