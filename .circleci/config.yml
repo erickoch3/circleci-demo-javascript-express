@@ -44,7 +44,7 @@ jobs:
       - checkout
       - run: echo "hello world" > ~/output.txt
       - persist_to_workspace:
-          root: ~/project
+          root: ~/
           paths:
             - "output.txt"
   
