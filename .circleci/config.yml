@@ -54,7 +54,7 @@ jobs:
           paths:
             - "output.txt"
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/project
       - run:
           name: print output file
           command: 'cat output.txt'
